@@ -2,6 +2,8 @@ package view
 
 import (
 	"log"
+	"math/rand"
+	"strconv"
 
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
@@ -68,12 +70,18 @@ func newBoard () *board{
 	b.selected = point{0, 0}
 	b.empty = point{3, 3}
 
-	b.matrix = [][]string {
-		{"01", "02", "03", "04"},
-		{"05", "06", "07", "08"},
-		{"09", "10", "11", "12"},
-		{"13", "14", "15", "X"},
+	newGame := rand.Perm(15)
+
+	b.matrix = make([][]string, 4)
+	for i := range b.matrix {
+		b.matrix[i] = make([]string, 4)
 	}
+
+	for i := 0; i<15; i++ {
+		b.matrix[i/4][i%4] =  strconv.Itoa(newGame[i]+1)
+	}
+
+	b.matrix[3][3] = "X"
 
 	b.t = table.New().
 		Border(lipgloss.NormalBorder()).
