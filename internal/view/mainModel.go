@@ -4,11 +4,13 @@ import (
 	"15puzzle/internal/game"
 
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
 )
 
 type MainModel struct {
 	board *board
 	g *game.Game
+	width, height int
 }
 
 func (m MainModel) Init() tea.Cmd {
@@ -16,12 +18,21 @@ func (m MainModel) Init() tea.Cmd {
 }
 
 func (m MainModel) View() string {
-	return m.board.t.Render()
+	return lipgloss.Place(
+		m.width,
+		m.height,
+		lipgloss.Center,
+		lipgloss.Center,
+		m.board.t.Render(),
+	)
 }
 
 func (m MainModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	var cmd tea.Cmd
 	switch msg := msg.(type) {
+	case tea.WindowSizeMsg:
+		m.width = msg.Width
+		m.height = msg.Height
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "ctrl+c":
