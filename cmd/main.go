@@ -16,7 +16,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	p := tea.NewProgram(mainModel)
+	p := tea.NewProgram(mainModel, tea.WithAltScreen())
 
 	if _, err := p.Run(); err != nil {
 		log.Fatal(err)
