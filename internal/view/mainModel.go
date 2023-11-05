@@ -38,19 +38,19 @@ func (m MainModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "ctrl+c":
 			return m, tea.Quit
 
-		case "h":
+		case "h", tea.KeyLeft.String():
 			if m.board.selected.x > 0 {
 				m.board.selected.x--
 			}
-		case "l":
+		case "l", tea.KeyRight.String():
 			if m.board.selected.x < 3 {
 				m.board.selected.x++
 			}
-		case "j":
+		case "j", tea.KeyDown.String():
 			if m.board.selected.y < 3 {
 				m.board.selected.y++
 			}
-		case "k":
+		case "k", tea.KeyUp.String():
 			if m.board.selected.y > 0 {
 				m.board.selected.y--
 			}
