@@ -1,11 +1,14 @@
 package view
 
 import (
+	"15puzzle/internal/game"
+
 	tea "github.com/charmbracelet/bubbletea"
 )
 
 type MainModel struct {
 	board *board
+	g *game.Game
 }
 
 func (m MainModel) Init() tea.Cmd {
@@ -49,6 +52,7 @@ func (m MainModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func InitMainModel() MainModel {
 	var m MainModel
-	m.board = newBoard();
+	m.g = game.NewGame()
+	m.board = newBoard(m.g.Puzzle);
 	return m
 }

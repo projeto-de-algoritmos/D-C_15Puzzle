@@ -1,8 +1,6 @@
 package view
 
 import (
-	"log"
-	"math/rand"
 	"strconv"
 
 	"github.com/charmbracelet/lipgloss"
@@ -38,7 +36,6 @@ func (b *board) swap() {
 	if !isPossibleToSwap(*b) {
 		return
 	}	
-	log.Println("Swap:", b.selected, b.empty)
 	aux := b.matrix[b.selected.y][b.selected.x]
 	b.matrix[b.selected.y][b.selected.x] = b.matrix[b.empty.y][b.empty.x]	
 	b.matrix[b.empty.y][b.empty.x] = aux
@@ -64,13 +61,11 @@ func (b *board) updateBoard() {
 		Rows(b.matrix[1:4]...)
 }
 
-func newBoard () *board{
+func newBoard (puzzle []int) *board{
 
 	b := new(board)
 	b.selected = point{0, 0}
 	b.empty = point{3, 3}
-
-	newGame := rand.Perm(15)
 
 	b.matrix = make([][]string, 4)
 	for i := range b.matrix {
@@ -78,7 +73,8 @@ func newBoard () *board{
 	}
 
 	for i := 0; i<15; i++ {
-		b.matrix[i/4][i%4] =  strconv.Itoa(newGame[i]+1)
+		//b.matrix[i/4][i%4] =  strconv.Itoa(puzzle[i]+1)
+		b.matrix[i/4][i%4] =  strconv.Itoa(puzzle[i]+1)
 	}
 
 	b.matrix[3][3] = "X"
