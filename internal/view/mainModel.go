@@ -25,21 +25,23 @@ func (m MainModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, tea.Quit
 
 		case "h":
-			if m.board.x > 0 {
-				m.board.x--
+			if m.board.selected.x > 0 {
+				m.board.selected.x--
 			}
 		case "l":
-			if m.board.x < 3 {
-				m.board.x++
+			if m.board.selected.x < 3 {
+				m.board.selected.x++
 			}
 		case "j":
-			if m.board.y < 4 {
-				m.board.y++
+			if m.board.selected.y < 3 {
+				m.board.selected.y++
 			}
 		case "k":
-			if m.board.y > 1 {
-				m.board.y--
+			if m.board.selected.y > 0 {
+				m.board.selected.y--
 			}
+		case tea.KeySpace.String():
+			m.board.swap()
 		}	
 	}
 	return m, cmd
