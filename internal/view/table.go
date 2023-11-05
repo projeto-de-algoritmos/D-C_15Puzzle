@@ -10,9 +10,11 @@ type board struct {
 	x, y int
 }
 
-func newBoard () board{
+func newBoard () *board{
 
-	var b board
+	b := new(board)
+	b.x = 0
+	b.y = 1
 
 	row := [][]string {
 		{"01", "02", "03", "04"},
@@ -21,21 +23,19 @@ func newBoard () board{
 		{"13", "14", "15", "X"},
 	}
 
-	t := table.New().
+	b.t = table.New().
 		Border(lipgloss.NormalBorder()).
 		BorderRow(true).
 		StyleFunc(func(row, col int) lipgloss.Style {
 			style := lipgloss.NewStyle().
 				Height(2).Width(4)
 
-			if col == 0 && row == 1 {
+			if col == b.x && row == b.y {
 				style = style.Foreground(lipgloss.Color("99"))
 			}
 			return style
 		}).
 		Rows(row...)
-
-	b.t = t
 
 	return b
 }
