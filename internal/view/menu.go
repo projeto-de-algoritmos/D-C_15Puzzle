@@ -7,7 +7,6 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-
 type Menu struct {
 	choices []string
 	cursor int
