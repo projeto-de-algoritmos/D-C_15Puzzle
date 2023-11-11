@@ -9,7 +9,7 @@ import (
 
 type MainModel struct {
 	board *board
-	g *game.Game
+	game *game.Game
 	width, height int
 }
 
@@ -39,23 +39,15 @@ func (m MainModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, tea.Quit
 
 		case "h", tea.KeyLeft.String():
-			if m.board.selected.x > 0 {
-				m.board.selected.x--
-			}
+			m.game.DecreaseY()
 		case "l", tea.KeyRight.String():
-			if m.board.selected.x < 3 {
-				m.board.selected.x++
-			}
+			m.game.IncreaseY()
 		case "j", tea.KeyDown.String():
-			if m.board.selected.y < 3 {
-				m.board.selected.y++
-			}
+			m.game.IncreaseX()
 		case "k", tea.KeyUp.String():
-			if m.board.selected.y > 0 {
-				m.board.selected.y--
-			}
+			m.game.DecreaseX()
 		case tea.KeySpace.String():
-			m.board.swap()
+			m.game.Swap() 
 		}	
 	}
 	return m, cmd
@@ -63,7 +55,7 @@ func (m MainModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func InitMainModel() MainModel {
 	var m MainModel
-	m.g = game.NewGame()
-	m.board = newBoard(m.g.Puzzle);
+	m.game = game.NewGame(4)
+	m.board = newBoard(m.game);
 	return m
 }

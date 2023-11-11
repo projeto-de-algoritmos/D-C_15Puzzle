@@ -3,24 +3,41 @@ package game
 import (
 	"log"
 	"math/rand"
+	"strconv"
 )
 
 type Game struct {
-	Puzzle []int
+	Puzzle [][]string
+	size int
+	selected point
+	empty point
 }
 
-func NewGame() *Game {
+func NewGame(size int) *Game {
 	game := new(Game)
+	game.size = size
+	game.empty.x = size-1
+	game.empty.y = size-1
+
 	var newPuzzle []int
 
 	for {
-		newPuzzle = rand.Perm(15)
+		newPuzzle = rand.Perm(size*size-1)
 		if isValidGame(newPuzzle) {
 			break
 		}
 		log.Println("Invalid Game")
 	}
-	game.Puzzle = newPuzzle
+
+	game.Puzzle = make([][]string, size)
+	for i := range game.Puzzle {
+		game.Puzzle[i] = make([]string, size)
+	}
+	for i := 0; i<size*size-1; i++ {
+		game.Puzzle[i/4][i%4] =  strconv.Itoa(newPuzzle[i]+1)
+	}
+	game.Puzzle[size-1][size-1] = "X"
+
 	return game
 }
 
