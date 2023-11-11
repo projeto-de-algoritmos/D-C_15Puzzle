@@ -3,9 +3,9 @@ package view
 import (
 	"15puzzle/internal/game"
 
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/lipgloss/table"
-	tea "github.com/charmbracelet/bubbletea"
 )
 
 type board struct {
@@ -20,7 +20,7 @@ func (m board) Init() tea.Cmd {
 }
 
 func (b board) View() string {
-		return b.t.Render()
+	return b.t.Render()
 }
 
 func (b board) Update(msg tea.Msg) (tea.Model, tea.Cmd) {

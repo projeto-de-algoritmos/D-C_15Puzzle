@@ -62,9 +62,13 @@ func (m Menu) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "j", tea.KeyDown.String():
-			m.cursor++
+			if m.cursor < 2 {
+				m.cursor++
+			}
 		case "k", tea.KeyUp.String():
-			m.cursor--
+			if m.cursor > 0 {
+				m.cursor--
+			}
 		case " ":
 			m.board = newBoard(m.selected[m.cursor])
 			m.board.isRender = true

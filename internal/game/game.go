@@ -1,6 +1,7 @@
 package game
 
 import (
+	"15puzzle/internal/dc"
 	"log"
 	"math/rand"
 	"strconv"
@@ -42,6 +43,6 @@ func NewGame(size int) *Game {
 }
 
 func isValidGame(puzzle []int) bool {
-	_, c := CountSliceInversions(puzzle)	
+	_, c := dc.CountSliceInversions(puzzle)	
 	return c%2 == 0
 }
