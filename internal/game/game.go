@@ -43,8 +43,5 @@ func NewGame(size int) *Game {
 
 func isValidGame(puzzle []int) bool {
 	_, c := CountSliceInversions(puzzle)	
-	if c%2 == 0 {
-		return true
-	}	
-	return false
+	return c%2 == 0
 }
