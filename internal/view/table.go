@@ -12,22 +12,28 @@ type point struct {
 }
 
 type board struct {
+	isRender bool
+	board *board
+	game *game.Game
+	width, height int
 	t *table.Table
 	selected point
 	empty point
 }
 
-
-
 func (t *board) updateBoard() {
 	t.t.ClearRows()
 }
 
-func newBoard (game *game.Game) *board{
+func newBoard (size int) board{
 
-	b := new(board)
+	game := game.NewGame(size)
+
+	var b board
 	b.selected = point{0, 0}
 	b.empty = point{3, 3}
+	b.game = game
+	b.isRender = true
 
 	b.t = table.New().
 		Border(lipgloss.NormalBorder()).

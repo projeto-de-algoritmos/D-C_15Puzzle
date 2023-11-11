@@ -34,7 +34,7 @@ func NewGame(size int) *Game {
 		game.Puzzle[i] = make([]string, size)
 	}
 	for i := 0; i<size*size-1; i++ {
-		game.Puzzle[i/4][i%4] =  strconv.Itoa(newPuzzle[i]+1)
+		game.Puzzle[i/size][i%size] =  strconv.Itoa(newPuzzle[i]+1)
 	}
 	game.Puzzle[size-1][size-1] = "X"
 

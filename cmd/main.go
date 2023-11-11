@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	mainModel := view.InitMainModel()
+	mainModel := view.NewMenu()
 
 	f, err := tea.LogToFile("debug.log", "debug")
 	if err != nil {
