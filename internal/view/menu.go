@@ -62,7 +62,7 @@ func (m Menu) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.KeyMsg:
 		switch msg.String() {
 		case "j", tea.KeyDown.String():
-			if m.cursor < 2 {
+			if m.cursor < len(m.selected)-1 {
 				m.cursor++
 			}
 		case "k", tea.KeyUp.String():
@@ -85,8 +85,9 @@ func NewMenu() Menu{
 	selected[0] = 3
 	selected[1] = 4
 	selected[2] = 5
+	selected[3] = 8
 	return Menu {
-		choices: []string{"Fácil", "Médio", "Difícil"},
+		choices: []string{"Fácil", "Médio", "Difícil", "Desafio"},
 		selected: selected,
 	}
 }

@@ -28,7 +28,7 @@ func (b board) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		switch msg.String() {
-		case "q":
+		case "esc", "q":
 			b.isRender = false
 		case "ctrl+c":
 			return b, tea.Quit
