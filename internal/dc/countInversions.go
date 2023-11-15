@@ -26,27 +26,22 @@ func mergeAndCountInversions(leftS, rightS []int) ([]int, int) {
 	mergedInv := 0
 	leftI, rightI := 0, 0
 
-	for i := 0; i < len(leftS)+len(rightS); i++ {
-		if leftI == len(leftS) {
-			mergedS = append(mergedS, rightS[rightI])
-			rightI++
-		} else if rightI == len(rightS) {
+	for leftI < len(leftS) && rightI < len(rightS) {
+		if leftS[leftI] <= rightS[rightI] {
 			mergedS = append(mergedS, leftS[leftI])
 			leftI++
-		} else if (leftI != len(leftS) && rightI != len(rightS)) && leftS[leftI] < rightS[rightI] {
-			mergedS = append(mergedS, leftS[leftI])
-			leftI++
-		} else if (leftI != len(leftS) && rightI != len(rightS)) && leftS[leftI] > rightS[rightI] {
+		} else {
 			mergedS = append(mergedS, rightS[rightI])
-			for _, v := range leftS {
-				rv := rightS[rightI]
-				if v > rv {
-					mergedInv++
-				}
-			}
+			mergedInv += len(leftS)-leftI
 			rightI++
 		}
 	}
+	if leftI < len(leftS) {
+		mergedS = append(mergedS, leftS[leftI:]...)
+	} else {
+		mergedS = append(mergedS, rightS[rightI:]...)
+	}
+
 	return mergedS, mergedInv
 }
 
