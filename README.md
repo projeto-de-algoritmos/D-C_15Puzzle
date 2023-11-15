@@ -26,14 +26,20 @@ de contagem de inversões.
 - **Linguagem**: Go
 - **Framework/Bibliotecas**: Bubbletea
 
+Para executar o projeto é necessário [instalar](https://go.dev/doc/install) a linguagem Go.
+
+```sh
+go run cmd/main.go
+```
+
 ## Uso
 
 | Teclas | Ações |
 | :-     | :-
-|Setas ou h,j,k,l| Movimenta o cursor|
-|Barra de espaço | Confirma ação     |
-|Esc ou q| Volta para o menu         |
-|Ctrl+c | Finaliza o jogo            |
+|Setas ou h, j, k, l| Movimenta o cursor|
+|Barra de espaço | Confirma ação        |
+|Esc ou q| Volta para o menu            |
+|Ctrl+c | Finaliza o jogo               |
 
 ## Outros
 
